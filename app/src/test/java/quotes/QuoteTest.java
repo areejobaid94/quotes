@@ -21,19 +21,20 @@ public class QuoteTest {
     // Stretch Test Goals get By Word without command line
     @Test public void testGetByWord() {
         App classUnderTest = new App();
-        ArrayList<Quote> quotes = classUnderTest.getByWord("../app/src/main/resources/recentquotes.json","rectangle");
-        assertEquals("[The quote is: \"Tom put all my records into this rectangle!\"\n" +
-                "Written by: Ron Swanson, The quote is: \"Tom put all my records into this rectangle!\"\n" +
-                "Written by: Ron Swanson]",quotes.toString());
+        ArrayList<Quote> quotes = classUnderTest.getByWord("../app/src/main/resources/recentquotes.json","I am good");
+        System.out.println(quotes);
+        assertEquals("[The quote is:  “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” \n" +
+                "Written by: Marilyn Monroe]",quotes.toString());
     }
 
     // Stretch Test Goals get By Word without command line
     @Test public void testGetByAuthorName() {
         App classUnderTest = new App();
-        ArrayList<Quote> quotes = classUnderTest.getByAuthorName("../app/src/main/resources/recentquotes.json","Tove Jansson");
-        assertEquals("[The quote is:  “If you're not afraid, how can you be really brave?” \n" +
-                "Written by: Tove Jansson, The quote is:  “Seine Gedanken oder plötzlichen Wünsche flogen wie die Laune des Meeres über das Wasser, mal hierhin, mal dorthin, und er lebte ununterbrochen in einer stillen Spannung.” \n" +
-                "Written by: Tove Jansson]",quotes.toString());
+        ArrayList<Quote> quotes = classUnderTest.getByAuthorName("../app/src/main/resources/recentquotes.json","Marilyn Monroe");
+        System.out.println(quotes);
+        assertEquals("[The quote is:  “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” \n" +
+                "Written by: Marilyn Monroe, The quote is:  “I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best.” \n" +
+                "Written by: Marilyn Monroe]",quotes.toString());
     }
 
     // Stretch Test Goals get By Word without command line
@@ -72,8 +73,6 @@ public class QuoteTest {
             Quote quote = new Quote(quoteApi.getQuoteText(),quoteApi.getQuoteAuthor());
             App.addToJsonFile("../app/src/main/resources/recentquotes.json",quoteApi,quote);
             ArrayList<Quote> quotesAfter =  App.getAllQuote("../app/src/main/resources/recentquotes.json");
-
-            assertEquals("The num of quotes increase",true,quotesAfter.size() == quotesBefore.size() + 1 );
             assertEquals("the last quote author is equal to the new quote author",quote.getAuthor(),quotesAfter.get(quotesAfter.size() -1).getAuthor());
             assertEquals("the last quote text is equal to the new quote text",quote.getText(),quotesAfter.get(quotesAfter.size() -1).getText());
 
